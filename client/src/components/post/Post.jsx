@@ -1,17 +1,27 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 import "./post.css";
 
 export default function Post({post}) {
-  const PF="http://localhost:5000/images/"
+  const [imgId,setImgId]=useState("")
+
+
   return (
     <div className="post">
+    {console.log(post)}
     {post.photo && 
+  <>
+
       <img
         className="postImg"
-        src={PF+post.photo}
+          src={`https://res.cloudinary.com/dvjc0fusx/image/upload/v1677194349/blog-app/${post.photo.split("/")[0]}.png`}     
         alt=""
       />
+      {/* <img 
+        src={post.profilePic}
+      /> */}
+  </>
     }
       <div className="postInfo">
         <div className="postCats">

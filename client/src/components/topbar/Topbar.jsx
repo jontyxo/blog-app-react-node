@@ -20,8 +20,12 @@ dispatch({type:"LOGOUT"})
               HOME
             </Link>
           </li>
-          <li className="topListItem">ABOUT</li>
-          <li className="topListItem">CONTACT</li>
+        
+          <li className="topListItem">
+            <Link className="link" to="/contact">
+              CONTACT
+            </Link>
+          </li>
           <li className="topListItem">
             <Link className="link" to="/write">
               WRITE
@@ -38,6 +42,7 @@ dispatch({type:"LOGOUT"})
               src={user.profilePic}
               alt=""
             />
+            <span>Hi, {user.username}</span>
           </Link>
         ) : (
           <ul className="topList">
@@ -53,7 +58,7 @@ dispatch({type:"LOGOUT"})
             </li>
           </ul>
         )}
-        <i className="topSearchIcon fas fa-search"></i>
+       
       </div>
     </div>
   );

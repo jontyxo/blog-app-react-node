@@ -26,7 +26,7 @@
 }
 
 .topCenter {
-  margin-left: 32rem;
+  margin-left: 35vw;
 }
 
 .topList {
@@ -38,7 +38,7 @@
 }
 
 .topListItem {
-  margin-right: 20px;
+  margin-right: 3vw;
   font-size: 18px;
   font-weight: 300;
   cursor: pointer;

@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useState,useRef } from "react";
 import "./write.css";
 import axios from "axios"
 import { Context } from "../../context/Context";
@@ -18,18 +18,21 @@ export default function Write() {
       desc
     }
     if(file){
-      const data=new FormData();
-      const fileName=Date.now() + file.name;
-      data.append("name",fileName);
-      data.append("file",file)
-      newPost.photo=fileName;
-      try{
-        const res=await axios.post("/api/upload",data);
-      
-        
-      }catch(err){
-        
-      }
+      const formData=new FormData();
+    
+    
+      formData.append("file",file)
+      formData.append("upload_preset","urde6fpz")
+const res=      await axios.post("https://api.cloudinary.com/v1_1/dvjc0fusx/image/upload",formData)
+console.log(res)       
+const photoid=res.data.public_id.split("/")[1];
+        console.log(photoid);
+       newPost.photo=photoid;
+
+   
+
+
+
     }
     try{
 
@@ -59,6 +62,9 @@ export default function Write() {
           <input id="fileInput" type="file" style={{ display: "none" }} 
             onChange={(e)=>setFile(e.target.files[0])}
           />
+           {/* <input id="fileInput" onClick={()=>{widgetRef.current.open()}} 
+           
+          /> */}
           <input
             className="writeInput"
             placeholder="Title"

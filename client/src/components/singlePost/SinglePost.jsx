@@ -6,9 +6,9 @@ import { Context } from "../../context/Context";
 
 
 export default function SinglePost() {
-  const PF="http://localhost:5000/images/"
   const location=useLocation();
   const path=location.pathname.split("/")[2];
+  const [imgId,setImgId]=useState("")
   const {user}=useContext(Context)
 
    
@@ -18,6 +18,8 @@ export default function SinglePost() {
    const getPost=async()=>{
     const res = await axios.get("/api/posts/"+path);
     setPost(res.data);
+    setImgId(res.data.photo.split("/")[0])
+
    }
    getPost();
   },[path])
@@ -34,7 +36,7 @@ export default function SinglePost() {
       {post.photo && 
         <img
           className="singlePostImg"
-          src={PF+post.photo}
+          src={`https://res.cloudinary.com/dvjc0fusx/image/upload/v1677194349/blog-app/${imgId}.png`}
           alt=""
         />
       }

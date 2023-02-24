@@ -6,16 +6,24 @@ export default function Register() {
   const [username,setUsername]=useState();
   const [email,setEmail]=useState();
   const [password,setPassword]=useState();
+  const [errmess,setErrmess]=useState(false);
   
   const handleSubmit=async (e)=>{
     e.preventDefault();
-    const res=await axios.post("/api/auth/register",{
-      username,
-      email,
-      password
-    })
-    res.data && window.location.replace("/login")
-    console.log(res);
+    try{
+
+      const res=await axios.post("/api/auth/register",{
+        username,
+        email,
+        password
+      })
+      res.data && window.location.replace("/login")
+    }
+   catch(err){
+    if(err.response.status===500) {
+setErrmess(true)
+    }
+   }
   }
 
     return (
@@ -38,7 +46,14 @@ export default function Register() {
         />
         <button className="registerButton" type="submit">Register</button>
       </form>
-        <button className="registerLoginButton">Login</button>
+        <button className="registerLoginButton" onClick={()=>{
+          window.location.assign('/login')
+        }}>Login</button>
+
+        {  errmess &&
+
+        <p className="errormess">There has been an Internal Server Error</p>
+        }
     </div>
     )
 }
